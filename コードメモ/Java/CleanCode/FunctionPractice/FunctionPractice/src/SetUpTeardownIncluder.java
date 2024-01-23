@@ -1,8 +1,8 @@
 public class SetUpTeardownIncluder {
-    private PageData pageData;
-    private boolean isSuite;
+    private PageData pageData; // ページデータ
+    private boolean isSuite; // 適しているか
     private WikiPage testPage;
-    private StringBuffer newPageContent;
+    private StringBuffer newPageContent; // 新しいページコンテンツ
     private PageCrawler pageCrawler;
 
     public static String render(PageData pageData) throws Exception {
@@ -48,8 +48,12 @@ public class SetUpTeardownIncluder {
         include(SuiteResponder.SUITE_SETUP_NAME, "-setup");
     }
 
-    private void includePageContent() throws Exception {
+    private void includeSetupPage() throws Exception {
         include("SetUp", "-setup");
+    }
+
+    private void includePageContent() throws Exception {
+        newPageContent.append(pageData.getContent());
     }
 
     private void includeTeardownPages() throws Exception {
@@ -78,6 +82,7 @@ public class SetUpTeardownIncluder {
         }
     }
 
+    // 指定したページの継承元ページを検索する
     private WikiPage findInheritedPage(String pageName) throws Exception {
         return PageCrawlerInpl.getInderitedPage(pageName, testPage);
     }
@@ -88,7 +93,7 @@ public class SetUpTeardownIncluder {
     }
 
     private void buildIncludeDirective(String pagePathName, String arg) {
-        new PageContent
+        newPageContent
             .append("\n!include")
             .append(arg)
             .append(".")
