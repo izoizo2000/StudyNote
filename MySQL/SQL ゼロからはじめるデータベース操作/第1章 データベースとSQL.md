@@ -19,7 +19,7 @@ CREATE TABLE Product
  product_type       VARCHAR(32)     NOT NULL,
  product_sale_price INTEGER         ,
  product_cost_price INTEGER         ,
- registration_date  DATA            ,
+ sign_up_at          DATA            ,
  PRIMARY KEY (product_id));
 ```
 <br>
